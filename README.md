@@ -13,7 +13,9 @@ and performs simple HTTP operation.
 
 ### Supported hardware ###
 
-* UBLOX Odin board (UBLOX_EVK_ODIN_W2)
+* UBLOX Odin board (UBLOX_EVK_ODIN_W2) *NOTE*: WiFi is disabled by default for this board, to enable it you'll need to
+  modify mbed-os/targets/targets.json file and add ```"EMAC"``` flag in ```device_has``` section for
+  ```UBLOX_EVK_ODIN_W2``` target.
 * ESP2866 module (Board it's connected to shouldn't have other network interface eg. Ethernet)
 
 ESP2866 is a fallback option and will be used if the build is for unsupported platform.
