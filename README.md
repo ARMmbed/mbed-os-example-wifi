@@ -20,9 +20,19 @@ ESP2866 is a fallback option and will be used if the build is for unsupported pl
 
 ## Configuration ##
 
-``` bash
--DMBED_DEMO_WIFI_SSID=ssid  # ssid
--DMBED_DEMO_WIFI_PASS=pass  # passphrase
+Edit ```mbed_app.json``` to include correct SSID and Password:
+
+```
+    "config": {
+        "wifi-ssid": {
+            "help": "WiFi SSID",
+            "value": "\"SSID\""
+        },
+        "wifi-password": {
+            "help": "WiFi Password",
+            "value": "\"Password\""
+        }
+    },
 ```
 
 ## Documentation ##
