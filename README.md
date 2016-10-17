@@ -43,7 +43,7 @@ Edit ```mbed_app.json``` to include correct SSID and Password:
  
 2. Compile and generate binary
 
-For example, for `GCC`:
+    For example, for `GCC`:
 
    ```
    mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
