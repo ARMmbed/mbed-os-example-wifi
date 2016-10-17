@@ -25,9 +25,6 @@
     ESP8266Interface wifi(D1, D0);
 #endif
 
-#define STR(x) STR2(x)
-#define STR2(x) #x
-
 const char *sec2str(nsapi_security_t sec)
 {
     switch (sec) {
@@ -102,7 +99,7 @@ int main()
     scan_demo(&wifi);
 
     printf("\r\nConnecting...\r\n");
-    int ret = wifi.connect(STR(MBED_DEMO_WIFI_SSID), STR(MBED_DEMO_WIFI_PASS), NSAPI_SECURITY_WPA_WPA2);
+    int ret = wifi.connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
     if (ret != 0) {
         printf("\r\nConnection error\r\n");
         return -1;
