@@ -18,11 +18,14 @@
 #include "TCPSocket.h"
 
 #if TARGET_UBLOX_EVK_ODIN_W2
-    #include "OdinWiFiInterface.h"
-    OdinWiFiInterface wifi;
+#include "OdinWiFiInterface.h"
+OdinWiFiInterface wifi;
 #else
-    #include "ESP8266Interface.h"
-    ESP8266Interface wifi(D1, D0);
+#if !TARGET_FF_ARDUINO
+#error [NOT_SUPPORTED] Only Arduino form factor devices are supported at this time
+#endif
+#include "ESP8266Interface.h"
+ESP8266Interface wifi(D1, D0);
 #endif
 
 const char *sec2str(nsapi_security_t sec)
