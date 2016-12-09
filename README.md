@@ -15,6 +15,14 @@ The program brings up the WiFi and the underlying network interface, and uses it
 
 ESP2866 is a fallback option and will be used if the build is for unsupported platform.
 
+#### Connecting the ESP2866 ####
+
+ESP module needs to be connected to RX and TX UART pins (+ power and ground) on your target board. That can be achieved using Grove shield or connected directly using jumper wires, please note that not all Arduino form factor boards have UART compatible with the Grove shiled.
+
+For Grove shield TX has to be connected to D1 and RX to D0.
+
+Make sure that UART module you're connecting ESP to is different than the debug UART connected to your USB port.
+
 ##  Getting started
 
 1. Import the example
