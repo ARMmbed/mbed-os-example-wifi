@@ -11,6 +11,8 @@ The program brings up the WiFi and the underlying network interface, and uses it
 ### Supported hardware ###
 
 * [UBLOX Odin board](https://developer.mbed.org/platforms/ublox-EVK-ODIN-W2/) (`UBLOX_EVK_ODIN_W2` target when using mbed CLI)
+* [NUCLEO_F429ZI](https://developer.mbed.org/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module
+* [NUCLEO_L476RG](https://developer.mbed.org/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module
 * Other mbed target with ESP2866 module (Board it's connected to shouldn't have other network interface eg. Ethernet)
 
 ESP2866 is a fallback option and will be used if the build is for unsupported platform.
