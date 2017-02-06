@@ -21,22 +21,13 @@
 #include "OdinWiFiInterface.h"
 OdinWiFiInterface wifi;
 
-#elif TARGET_NUCLEO_L476RG
-#include "ESP8266Interface.h"
-// ESP8266_WIFI TX to be connected to D2 (Serial1_Rx)
-// ESP8266_WIFI_RX to be connected to D8 (Serial1_Tx)
-ESP8266Interface wifi(D8, D2);
-
-#elif  TARGET_NUCLEO_F429ZI
-#include "ESP8266Interface.h"
-ESP8266Interface wifi(D1, D0);
 #else
 #if !TARGET_FF_ARDUINO
 #error [NOT_SUPPORTED] Only Arduino form factor devices are supported at this time
 #endif
 #include "ESP8266Interface.h"
 
-ESP8266Interface wifi(D1, D0);
+ESP8266Interface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
 
 #endif
 
