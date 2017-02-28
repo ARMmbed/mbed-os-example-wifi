@@ -20,11 +20,9 @@ ESP2866 is a fallback option and will be used if the build is for unsupported pl
 
 #### Connecting the ESP2866 ####
 
-ESP module needs to be connected to RX and TX UART pins (+ power and ground) on your target board. That can be achieved using Grove shield or connected directly using jumper wires, please note that not all Arduino form factor boards have UART compatible with the Grove shiled.
+To wire the ESP8266 module up to your development board, look at the [ESP8266 Cookbook page](https://developer.mbed.org/users/4180_1/notebook/using-the-esp8266-with-the-mbed-lpc1768/). In general this means hooking up the ESP8266 TX pin up to `D0` and the ESP8266 RX pin up to `D1` on your development board.
 
-For Grove shield TX has to be connected to D1 and RX to D0.
-
-Make sure that UART module you're connecting ESP to is different than the debug UART connected to your USB port.
+**Note on NUCLEO boards:** On the NUCLEO boards pins `D0` and `D1` are used for serial communication with the computer. Use pins `D8` (to ESP8266 TX) and `D2` (to ESP8266 RX) instead.
 
 ##  Getting started
 
