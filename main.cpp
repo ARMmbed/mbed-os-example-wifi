@@ -81,22 +81,38 @@ void scan_demo(WiFiInterface *wifi)
 void http_demo(NetworkInterface *net)
 {
     TCPSocket socket;
+    nsapi_error_t response;
 
     printf("Sending HTTP request to www.arm.com...\r\n");
 
     // Open a socket on the network interface, and create a TCP connection to www.arm.com
     socket.open(net);
-    socket.connect("www.arm.com", 80);
+    response = socket.connect("www.arm.com", 80);
+    if(0 != response) {
+        printf("Error connecting: %d\r\n", response);
+        socket.close();
+        return;
+    }
 
     // Send a simple http request
     char sbuffer[] = "GET / HTTP/1.1\r\nHost: www.arm.com\r\n\r\n";
-    int scount = socket.send(sbuffer, sizeof sbuffer);
-    printf("sent %d [%.*s]\r\n", scount, strstr(sbuffer, "\r\n")-sbuffer, sbuffer);
+    response = socket.send(sbuffer, sizeof sbuffer);
+    if(response < 0) {
+        printf("Error sending data: %d\r\n", response);
+        socket.close();
+        return;
+    } else {
+        printf("sent %d [%.*s]\r\n", response, strstr(sbuffer, "\r\n")-sbuffer, sbuffer);
+    }
 
     // Recieve a simple http response and print out the response line
     char rbuffer[64];
-    int rcount = socket.recv(rbuffer, sizeof rbuffer);
-    printf("recv %d [%.*s]\r\n", rcount, strstr(rbuffer, "\r\n")-rbuffer, rbuffer);
+    response = socket.recv(rbuffer, sizeof rbuffer);
+    if(response < 0) {
+        printf("Error receiving data: %d\r\n", response);
+    } else {
+        printf("recv %d [%.*s]\r\n", response, strstr(rbuffer, "\r\n")-rbuffer, rbuffer);
+    }
 
     // Close the socket to return its memory and bring down the network interface
     socket.close();
