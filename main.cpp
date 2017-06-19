@@ -96,19 +96,26 @@ void http_demo(NetworkInterface *net)
 
     // Send a simple http request
     char sbuffer[] = "GET / HTTP/1.1\r\nHost: www.arm.com\r\n\r\n";
-    response = socket.send(sbuffer, sizeof sbuffer);
-    if(response < 0) {
-        printf("Error sending data: %d\r\n", response);
-        socket.close();
-        return;
-    } else {
-        printf("sent %d [%.*s]\r\n", response, strstr(sbuffer, "\r\n")-sbuffer, sbuffer);
+    nsapi_size_t size = sizeof sbuffer;
+    response = 0;
+    while(size)
+    {
+        response = socket.send(sbuffer+response, size);
+        if (response < 0) {
+            printf("Error sending data: %d\r\n", response);
+            socket.close();
+            return;
+        } else {
+            size -= response;
+            // Check if entire message was sent or not
+            printf("sent %d [%.*s]\r\n", response, strstr(sbuffer, "\r\n")-sbuffer, sbuffer);
+        }
     }
 
     // Recieve a simple http response and print out the response line
     char rbuffer[64];
     response = socket.recv(rbuffer, sizeof rbuffer);
-    if(response < 0) {
+    if (response < 0) {
         printf("Error receiving data: %d\r\n", response);
     } else {
         printf("recv %d [%.*s]\r\n", response, strstr(rbuffer, "\r\n")-rbuffer, rbuffer);
