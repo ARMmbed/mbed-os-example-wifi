@@ -21,12 +21,16 @@
 #include "OdinWiFiInterface.h"
 OdinWiFiInterface wifi;
 
+#elif TARGET_REALTEK_RTL8195AM
+#include "RTWInterface.h"
+RTWInterface wifi;
+
 #else
 #if !TARGET_FF_ARDUINO
 #error [NOT_SUPPORTED] Only Arduino form factor devices are supported at this time
 #endif
-#include "ESP8266Interface.h"
 
+#include "ESP8266Interface.h"
 ESP8266Interface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
 
 #endif
