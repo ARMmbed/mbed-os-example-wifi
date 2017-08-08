@@ -18,7 +18,7 @@
 #include "TCPSocket.h"
 
 #define WIFI_ESP8266    1
-#define WIFI_IDW01M1    2
+#define WIFI_IDW0XX1    2
 
 #if TARGET_UBLOX_EVK_ODIN_W2
 #include "OdinWiFiInterface.h"
@@ -33,10 +33,10 @@ RTWInterface wifi;
 #if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
 #include "ESP8266Interface.h"
 ESP8266Interface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
-#elif MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW01M1
+#elif MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW0XX1
 #include "SpwfSAInterface.h"
 SpwfSAInterface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
-#endif // MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW01M1
+#endif // MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW0XX1
 
 #endif
 
