@@ -17,6 +17,9 @@
 #include "mbed.h"
 #include "TCPSocket.h"
 
+#define WIFI_ESP8266    1
+#define WIFI_IDW01M1    2
+
 #if TARGET_UBLOX_EVK_ODIN_W2
 #include "OdinWiFiInterface.h"
 OdinWiFiInterface wifi;
@@ -28,12 +31,17 @@ RTWInterface wifi;
 #else
 #if !TARGET_FF_ARDUINO
 #error [NOT_SUPPORTED] Only Arduino form factor devices are supported at this time
-#endif
+#endif // !TARGET_FF_ARDUINO
 
+#if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
 #include "ESP8266Interface.h"
 ESP8266Interface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
+#elif MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW01M1
+#include "SpwfSAInterface.h"
+SpwfSAInterface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
+#endif // MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW01M1
 
-#endif
+#endif // TARGET_UBLOX_EVK_ODIN_W2
 
 const char *sec2str(nsapi_security_t sec)
 {
