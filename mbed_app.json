@@ -6,19 +6,19 @@
 	},
         "wifi-ssid": {
             "help": "WiFi SSID",
-            "value": "\"SSID\""
+            "value": "\"crespan\""
         },
         "wifi-password": {
             "help": "WiFi Password",
-            "value": "\"PASSWORD\""
+            "value": "\"Arches0n\""
         },
         "wifi-tx": {
             "help": "TX pin for serial connection to external device",
-            "value": "D1"
+            "value": "D8"
         },
         "wifi-rx": {
             "help": "RX pin for serial connection to external device",
-            "value": "D0"
+            "value": "D2"
         }
     },
     "target_overrides": {
