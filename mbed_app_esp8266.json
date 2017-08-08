@@ -2,7 +2,7 @@
     "config": {
 	"wifi-shield": {
             "help": "Options are internal, WIFI_ESP8266, WIFI_IDW0XX1",
-            "value": "internal"
+            "value": "WIFI_ESP8266"
 	},
         "wifi-ssid": {
             "help": "WiFi SSID",
