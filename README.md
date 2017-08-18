@@ -12,50 +12,62 @@ The program brings up the WiFi and the underlying network interface, and uses it
 
 * [UBLOX Odin board](https://developer.mbed.org/platforms/ublox-EVK-ODIN-W2/) built-in WiFi module
 * [REALTEK_RTL8195AM](https://developer.mbed.org/platforms/REALTEK-RTL8195AM/) built-in WiFi module
+* [NUCLEO_F401RE](https://developer.mbed.org/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) WiFi expansion board using pins D8 D2
 * [NUCLEO_F429ZI](https://developer.mbed.org/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 D0
 * [NUCLEO_L476RG](https://developer.mbed.org/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 D2
-* Other mbed target with ESP2866 module (Board it's connected to shouldn't have other network interface eg. Ethernet)
+* Other mbed targets with ESP2866 module or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board
+  *(the mbed target board the WiFi shield gets connected to shouldn't have any other network interface e.g. Ethernet)*
 
 ESP2866 is a fallback option and will be used if the build is for unsupported platform.
 
 #### Connecting the ESP2866 ####
-
 To connect the ESP8266 module to your development board, look at the [ESP8266 Cookbook page](https://developer.mbed.org/users/4180_1/notebook/using-the-esp8266-with-the-mbed-lpc1768/). In general, this means hooking up the ESP8266 TX pin to `D0` and the ESP8266 RX pin to `D1` on your development board.
 
-**Note on NUCLEO boards:** On the NUCLEO boards, pins `D0` and `D1` are used for serial communication with the computer. Use pins `D8` (to ESP8266 TX) and `D2` (to ESP8266 RX) instead.
+**Note:** on NUCLEO development boards, pins `D0` and `D1` are used for serial communication with the computer. Use pins `D8` (to ESP8266 TX) and `D2` (to ESP8266 RX) instead.
+
+#### Connecting the X-NUCLEO-IDW01M1 ####
+To connect the [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board to your NUCLEO development board, just plug the expansion board on top of the NUCLEO board using the Morpho connector.
 
 ##  Getting started
 
 1. Import the example
 
-  ```
-  mbed import mbed-os-example-wifi
-  cd mbed-os-example-wifi
-  ```
-2. Configure the WiFi credentials
+   ```
+   mbed import mbed-os-example-wifi
+   cd mbed-os-example-wifi
+   ```
+2. Configure the WiFi shield to use
 
-  Edit ```mbed_app.json``` to include correct SSID and Password:
+   Edit ```mbed_app.json``` to include correct WiFi shield, SSID and Password:
 
-  ```
-      "config": {
-          "wifi-ssid": {
-              "help": "WiFi SSID",
-              "value": "\"SSID\""
-          },
-          "wifi-password": {
-              "help": "WiFi Password",
-              "value": "\"Password\""
-          }
-      },
-  ```
+   ```
+       "config": { 
+ 	  "wifi-shield": {
+               "help": "Options are WIFI_ESP8266, WIFI_IDW01M1",
+               "value": "WIFI_IDW01M1"
+        	  },
+           "wifi-ssid": {
+               "help": "WiFi SSID",
+               "value": "\"SSID\""
+           },
+           "wifi-password": {
+               "help": "WiFi Password",
+               "value": "\"Password\""
+           }
+       },
+   ```
 
-3. Compile and generate binary
+3. Copy the respective _ignore_ file to `.mbedignore`
+   * Copy `esp8266-mbedignore` when using ESP2866 module.
+   * Copy `idw01m1-mbedignore` when using [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board.
+  
+4. Compile and generate binary
 
-  For example, for `GCC`:
+   For example, for `GCC`:
 
-  ```
-  mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
-  ```
+   ```
+   mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
+   ```
 
 ## Documentation ##
 
