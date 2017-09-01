@@ -6,19 +6,19 @@
 	},
         "wifi-ssid": {
             "help": "WiFi SSID",
-            "value": "\"crespan\""
+            "value": "\"SSID\""
         },
         "wifi-password": {
             "help": "WiFi Password",
-            "value": "\"Arches0n\""
+            "value": "\"PASSWORD\""
         },
         "wifi-tx": {
             "help": "TX pin for serial connection to external device",
-            "value": "D8"
+            "value": "D1"
         },
         "wifi-rx": {
             "help": "RX pin for serial connection to external device",
-            "value": "D2"
+            "value": "D0"
         }
     },
     "target_overrides": {
@@ -26,6 +26,10 @@
             "target.device_has": ["EMAC"]
         },
         "NUCLEO_L476RG": {
+            "wifi-tx": "D8",
+            "wifi-rx": "D2"
+        },
+        "NUCLEO_F401RE": {
             "wifi-tx": "D8",
             "wifi-rx": "D2"
         }

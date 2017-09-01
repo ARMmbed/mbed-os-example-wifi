@@ -29,9 +29,15 @@ OdinWiFiInterface wifi;
 RTWInterface wifi;
 
 #else
+#if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
+#if !TARGET_FF_MORPHO
+#error [NOT_SUPPORTED] Only Morpho form factor devices are supported for this shield at this time
+#endif // !TARGET_FF_MORPHO
+#else
 #if !TARGET_FF_ARDUINO
-#error [NOT_SUPPORTED] Only Arduino form factor devices are supported at this time
+#error [NOT_SUPPORTED] Only Arduino form factor devices are supported for this shield at this time
 #endif // !TARGET_FF_ARDUINO
+#endif // MBED_CONF_APP_WIFI_SHIELD != WIFI_ESP8266
 
 #if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
 #include "ESP8266Interface.h"
