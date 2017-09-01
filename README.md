@@ -15,12 +15,12 @@ The program brings up the WiFi and the underlying network interface, and uses it
 * [NUCLEO_F401RE](https://developer.mbed.org/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) WiFi expansion board using pins D8 D2
 * [NUCLEO_F429ZI](https://developer.mbed.org/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 D0
 * [NUCLEO_L476RG](https://developer.mbed.org/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 D2
-* Other mbed targets with ESP2866 module or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board
+* Other mbed targets with ESP8266 module or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board
   *(the mbed target board the WiFi shield gets connected to shouldn't have any other network interface e.g. Ethernet)*
 
-ESP2866 is a fallback option and will be used if the build is for unsupported platform.
+ESP8266 is a fallback option and will be used if the build is for unsupported platform.
 
-#### Connecting the ESP2866 ####
+#### Connecting the ESP8266 ####
 To connect the ESP8266 module to your development board, look at the [ESP8266 Cookbook page](https://developer.mbed.org/users/4180_1/notebook/using-the-esp8266-with-the-mbed-lpc1768/). In general, this means hooking up the ESP8266 TX pin to `D0` and the ESP8266 RX pin to `D1` on your development board.
 
 **Note:** on NUCLEO development boards, pins `D0` and `D1` are used for serial communication with the computer. Use pins `D8` (to ESP8266 TX) and `D2` (to ESP8266 RX) instead.
@@ -58,7 +58,7 @@ To connect the [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO
    ```
 
 3. Copy the respective _ignore_ file to `.mbedignore`
-   * Copy `esp8266-mbedignore` when using ESP2866 module.
+   * Copy `esp8266-mbedignore` when using ESP8266 module.
    * Copy `idw01m1-mbedignore` when using [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board.
   
 4. Compile and generate binary
