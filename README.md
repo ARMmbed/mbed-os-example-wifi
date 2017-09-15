@@ -68,6 +68,38 @@ To connect the [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO
    ```
    mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
    ```
+   
+ 5. Open a serial console session with the target platform using the following parameters:
+    * **Baud rate:** 9600
+    * **Data bits:** 8
+    * **Stop bits:** 1
+    * **Parity:** None
+ 
+ 6. Copy or drag the application `mbed-os-example-wifi.bin` in the folder `mbed-os-example-wifi/BUILD/<TARGET NAME>/<PLATFORM NAME>` onto the target board.
+ 
+ 7. The serial console should display a similar output to below, indicating a successful WiFi connection:
+ ```
+ WiFi example
+
+Scan:
+Network: Dave Hot Spot secured: Unknown BSSID: 00:01:02:03:04:05 RSSI: -58 Ch: 1
+1 network available.
+
+Connecting...
+Success
+
+MAC: 00:01:02:03:04:05
+IP: 192.168.0.5
+Netmask: 255.255.255.0
+Gateway: 192.168.0.1
+RSSI: -27
+
+Sending HTTP request to www.arm.com...
+sent 38 [GET / HTTP/1.1]
+recv 64 [HTTP/1.1 301 Moved Permanently]
+
+Done
+```
 
 ## Documentation ##
 
