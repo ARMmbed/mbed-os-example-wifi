@@ -28,16 +28,7 @@ OdinWiFiInterface wifi;
 #include "RTWInterface.h"
 RTWInterface wifi;
 
-#else
-#if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
-#if !TARGET_FF_MORPHO
-#error [NOT_SUPPORTED] Only Morpho form factor devices are supported for this shield at this time
-#endif // !TARGET_FF_MORPHO
-#else
-#if !TARGET_FF_ARDUINO
-#error [NOT_SUPPORTED] Only Arduino form factor devices are supported for this shield at this time
-#endif // !TARGET_FF_ARDUINO
-#endif // MBED_CONF_APP_WIFI_SHIELD != WIFI_ESP8266
+#else // External WiFi modules
 
 #if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
 #include "ESP8266Interface.h"
@@ -47,7 +38,7 @@ ESP8266Interface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
 SpwfSAInterface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
 #endif // MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW01M1
 
-#endif // TARGET_UBLOX_EVK_ODIN_W2
+#endif
 
 const char *sec2str(nsapi_security_t sec)
 {
