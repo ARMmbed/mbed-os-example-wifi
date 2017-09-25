@@ -41,7 +41,7 @@ To connect the [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO
    Edit ```mbed_app.json``` to include correct WiFi shield, SSID and Password:
 
    ```
-       "config": { 
+       "config": {
  	  "wifi-shield": {
                "help": "Options are WIFI_ESP8266, WIFI_IDW01M1",
                "value": "WIFI_IDW01M1"
@@ -57,10 +57,13 @@ To connect the [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO
        },
    ```
 
+   For built-in WiFi, ignore the value of `wifi-shield`
+
 3. Copy the respective _ignore_ file to `.mbedignore`
    * Copy `esp8266-mbedignore` when using ESP8266 module.
    * Copy `idw01m1-mbedignore` when using [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board.
-  
+   * For built-in WiFi, keep the default `.mbedignore`
+
 4. Compile and generate binary
 
    For example, for `GCC`:
