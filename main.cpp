@@ -110,7 +110,7 @@ void http_demo(NetworkInterface *net)
 
     // Send a simple http request
     char sbuffer[] = "GET / HTTP/1.1\r\nHost: www.arm.com\r\n\r\n";
-    nsapi_size_t size = sizeof sbuffer;
+    nsapi_size_t size = strlen(sbuffer);
     response = 0;
     while(size)
     {
