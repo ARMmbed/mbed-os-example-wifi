@@ -59,7 +59,7 @@ const char *sec2str(nsapi_security_t sec)
     }
 }
 
-void scan_demo(WiFiInterface *wifi)
+int scan_demo(WiFiInterface *wifi)
 {
     WiFiAccessPoint *ap;
 
@@ -81,6 +81,7 @@ void scan_demo(WiFiInterface *wifi)
     printf("%d networks available.\n", count);
 
     delete[] ap;
+    return count;
 }
 
 void http_demo(NetworkInterface *net)
@@ -132,9 +133,15 @@ void http_demo(NetworkInterface *net)
 
 int main()
 {
+    int count = 0;
+
     printf("WiFi example\n\n");
 
-    scan_demo(&wifi);
+    count = scan_demo(&wifi);
+    if (count == 0) {
+        printf("No WIFI APNs found - can't continue further.\n");
+        return -1;
+    }
 
     printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
     int ret = wifi.connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
