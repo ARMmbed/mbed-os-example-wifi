@@ -136,7 +136,7 @@ int main()
 
     scan_demo(&wifi);
 
-    printf("\nConnecting...\n");
+    printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
     int ret = wifi.connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
     if (ret != 0) {
         printf("\nConnection error\n");
