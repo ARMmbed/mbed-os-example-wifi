@@ -30,7 +30,7 @@ def toolchains = [
 // Supported RF shields
 def radioshields = [
   "builtin",
-  "WIFI_IDW01M1",
+  "WIFI_IDW0XX1",
   "WIFI_ESP8266"
   ]
 
