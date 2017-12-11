@@ -1,12 +1,14 @@
 # mbed-os-example-wifi #
 
-WiFi example for mbed OS
+WiFi example for Mbed OS
 
 ## Getting started with the WiFi API ##
 
-This is a quick example of a simple WiFi application using the WiFi and network-socket APIs that is provided as a part of [mbed-os](github.com/armmbed/mbed-os).
+This is a quick example of a simple WiFi application using the WiFi and network-socket APIs that is provided as a part of [Mbed OS](https://github.com/ARMmbed/mbed-os).
 
 The program brings up the WiFi and the underlying network interface, and uses it to scans available networks, connects to a network, prints interface and connection details and performs simple HTTP operation.
+
+For more information about WiFi APIs, please visit the [Mbed OS WiFi](https://os.mbed.com/docs/latest/reference/wi-fi.html) documentation.
 
 ### Supported hardware ###
 
@@ -16,8 +18,8 @@ The program brings up the WiFi and the underlying network interface, and uses it
 * [NUCLEO_F401RE](https://developer.mbed.org/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) WiFi expansion board using pins PA_9 PA_10 _(of the Morpho connector)_
 * [NUCLEO_F429ZI](https://developer.mbed.org/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 D0
 * [NUCLEO_L476RG](https://developer.mbed.org/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 D2
-* Other mbed targets with ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html), or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board
-  *(the mbed target board the WiFi shield gets connected to shouldn't have any other network interface e.g. Ethernet)*
+* Other Mbed targets with ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html), or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board
+  *(the Mbed target board the WiFi shield gets connected to shouldn't have any other network interface e.g. Ethernet)*
 
 ESP8266 is a fallback option and will be used if the build is for unsupported platform.
 
@@ -102,6 +104,6 @@ recv 64 [HTTP/1.1 301 Moved Permanently]
 Done
 ```
 
-## Documentation ##
+## Troubleshooting
 
-More information on the network-socket API can be found in the [mbed handbook](https://docs.mbed.com/docs/mbed-os-api-reference/en/5.2/APIs/communication/network_sockets/).
+If you have problems, you can review the [documentation](https://os.mbed.com/docs/latest/tutorials/debugging.html) for suggestions on what could be wrong and how to fix it.
