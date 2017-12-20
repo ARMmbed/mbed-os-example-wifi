@@ -1,45 +1,50 @@
 # mbed-os-example-wifi #
 
-WiFi example for mbed OS
+Wi-Fi example for Mbed OS
 
-## Getting started with the WiFi API ##
+## Getting started with the Wi-Fi API ##
 
-This is a quick example of a simple WiFi application using the WiFi and network-socket APIs that is provided as a part of [mbed-os](github.com/armmbed/mbed-os).
+This is an example of a Wi-Fi application using the Wi-Fi and network socket APIs that [Mbed OS](https://github.com/ARMmbed/mbed-os) provides.
 
-The program brings up the WiFi and the underlying network interface, and uses it to scans available networks, connects to a network, prints interface and connection details and performs simple HTTP operation.
+The program brings up the Wi-Fi and the underlying network interface and uses it to scan available networks, connects to a network, prints interface and connection details and performs an HTTP operation.
+
+For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://os.mbed.com/docs/latest/reference/wi-fi.html) documentation.
 
 ### Supported hardware ###
 
-* [UBLOX Odin board](https://developer.mbed.org/platforms/ublox-EVK-ODIN-W2/) built-in WiFi module
-* [REALTEK_RTL8195AM](https://developer.mbed.org/platforms/REALTEK-RTL8195AM/) built-in WiFi module
-* [NUCLEO_F401RE](https://developer.mbed.org/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) WiFi expansion board using pins D8 D2 _(of the Arduino connector)_
-* [NUCLEO_F401RE](https://developer.mbed.org/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) WiFi expansion board using pins PA_9 PA_10 _(of the Morpho connector)_
-* [NUCLEO_F429ZI](https://developer.mbed.org/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 D0
-* [NUCLEO_L476RG](https://developer.mbed.org/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 D2
-* Other mbed targets with ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html), or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board
-  *(the mbed target board the WiFi shield gets connected to shouldn't have any other network interface e.g. Ethernet)*
+* [u-blox Odin board](https://os.mbed.com/platforms/ublox-EVK-ODIN-W2/) built-in Wi-Fi module.
+* [Realtek RTL8195AM](https://os.mbed.com/platforms/REALTEK-RTL8195AM/) built-in Wi-Fi module.
+* [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) Wi-Fi expansion board using pins D8 and D2 _(of the Arduino connector)_.
+* [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) Wi-Fi expansion board using pins PA_9 and PA_10 _(of the Morpho connector)_.
+* [NUCLEO-F429ZI](https://os.mbed.com/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 and D0.
+* [NUCLEO-L476RG](https://os.mbed.com/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 and D2.
+* Other Mbed targets with an ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) expansion board.
+  *(The Mbed target board the Wi-Fi shield connects to shouldn't have any other network interface, for example Ethernet.)*
 
-ESP8266 is a fallback option and will be used if the build is for unsupported platform.
+ESP8266 is a fallback option if the build is for unsupported platform.
 
 #### Connecting the ESP8266 ####
+
 To connect the ESP8266 module to your development board, look at the [ESP8266 Cookbook page](https://developer.mbed.org/users/4180_1/notebook/using-the-esp8266-with-the-mbed-lpc1768/). In general, this means hooking up the ESP8266 TX pin to `D0` and the ESP8266 RX pin to `D1` on your development board.
 
-**Note:** on NUCLEO development boards, pins `D0` and `D1` are used for serial communication with the computer. Use pins `D8` (to ESP8266 TX) and `D2` (to ESP8266 RX) instead.
+**Note:** On NUCLEO development boards, pins `D0` and `D1` are used for serial communication with the computer. Use pins `D8` (to ESP8266 TX) and `D2` (to ESP8266 RX) instead.
 
 #### Connecting the X-NUCLEO-IDW0XX1 ####
-To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board to your NUCLEO development board, just plug the expansion board on top of the NUCLEO board using the Arduino or Morpho connector, respectively.
+
+To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board to your NUCLEO development board, plug the expansion board on top of the NUCLEO board using the Arduino or Morpho connector.
 
 ##  Getting started ##
 
-1. Import the example
+1. Import the example.
 
    ```
    mbed import mbed-os-example-wifi
    cd mbed-os-example-wifi
    ```
-2. Configure the WiFi shield to use
+   
+2. Configure the Wi-Fi shield to use.
 
-   Edit ```mbed_app.json``` to include correct WiFi shield, SSID and Password:
+   Edit ```mbed_app.json``` to include the correct Wi-Fi shield, SSID and password:
 
    ```
        "config": {
@@ -58,11 +63,11 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
        },
    ```
 
-   Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```, and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
+   Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```) and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
    
-   For built-in WiFi, ignore the value of `wifi-shield`
+   For built-in Wi-Fi, ignore the value of `wifi-shield`.
 
-3. Compile and generate binary
+3. Compile and generate binary.
 
    For example, for `GCC`:
 
@@ -71,6 +76,7 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
    ```
    
  4. Open a serial console session with the target platform using the following parameters:
+ 
     * **Baud rate:** 9600
     * **Data bits:** 8
     * **Stop bits:** 1
@@ -78,7 +84,8 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
  
  5. Copy or drag the application `mbed-os-example-wifi.bin` in the folder `mbed-os-example-wifi/BUILD/<TARGET NAME>/<PLATFORM NAME>` onto the target board.
  
- 6. The serial console should display a similar output to below, indicating a successful WiFi connection:
+ 6. The serial console should display a similar output to below, indicating a successful Wi-Fi connection:
+ 
  ```
  WiFi example
 
@@ -102,6 +109,6 @@ recv 64 [HTTP/1.1 301 Moved Permanently]
 Done
 ```
 
-## Documentation ##
+## Troubleshooting
 
-More information on the network-socket API can be found in the [mbed handbook](https://docs.mbed.com/docs/mbed-os-api-reference/en/5.2/APIs/communication/network_sockets/).
+If you have problems, you can review the [documentation](https://os.mbed.com/docs/latest/tutorials/debugging.html) for suggestions on what could be wrong and how to fix it.
