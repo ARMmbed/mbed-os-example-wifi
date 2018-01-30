@@ -14,7 +14,7 @@ if (params.mbed_os_revision == '') {
 // List of targets with supported RF shields to compile
 def targets = [
   "UBLOX_EVK_ODIN_W2": ["builtin"],
-  // "REALTEK_RTL8195AM": ["builtin"], // Disabled because of https://github.com/ARMmbed/mbed-os/issues/5545
+  "REALTEK_RTL8195AM": ["builtin"],
   "K64F": ["WIFI_ESP8266"],
   "NUCLEO_F401RE": ["WIFI_IDW0XX1"],
   "NUCLEO_F429ZI": ["WIFI_ESP8266"]
