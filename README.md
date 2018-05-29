@@ -14,6 +14,8 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
 
 * [u-blox Odin board](https://os.mbed.com/platforms/ublox-EVK-ODIN-W2/) built-in Wi-Fi module.
 * [Realtek RTL8195AM](https://os.mbed.com/platforms/REALTEK-RTL8195AM/) built-in Wi-Fi module.
+* [ST DISCO IOT board](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
+* [ST DISCO_F413ZH board](https://os.mbed.com/platforms/ST-Discovery-F413H/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
 * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) Wi-Fi expansion board using pins D8 and D2 _(of the Arduino connector)_.
 * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) Wi-Fi expansion board using pins PA_9 and PA_10 _(of the Morpho connector)_.
 * [NUCLEO-F429ZI](https://os.mbed.com/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 and D0.
@@ -49,7 +51,7 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
    ```
        "config": {
  	  "wifi-shield": {
-               "help": "Options are WIFI_ESP8266, WIFI_IDW0XX1",
+               "help": "Options are internal, WIFI_ESP8266, WIFI_ISM43362, WIFI_IDW0XX1",
                "value": "WIFI_ESP8266"
         	  },
            "wifi-ssid": {
@@ -65,6 +67,8 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
 
    Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```) and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
    
+   For WIFI_ISM43362, ignore the value of `wifi-shield` as it is already overrides per supported targets.
+
    For built-in Wi-Fi, ignore the value of `wifi-shield`.
 
 3. Compile and generate binary.
