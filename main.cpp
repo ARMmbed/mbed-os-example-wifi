@@ -74,13 +74,23 @@ int scan_demo(WiFiInterface *wifi)
 
     int count = wifi->scan(NULL,0);
 
+    if (count <= 0) {
+        printf("scan() failed with return value: %d\n", count);
+        return 0;
+    }
+
     /* Limit number of network arbitrary to 15 */
     count = count < 15 ? count : 15;
 
     ap = new WiFiAccessPoint[count];
     count = wifi->scan(ap, count);
-    for (int i = 0; i < count; i++)
-    {
+
+    if (count <= 0) {
+        printf("scan() failed with return value: %d\n", count);
+        return 0;
+    }
+
+    for (int i = 0; i < count; i++) {
         printf("Network: %s secured: %s BSSID: %hhX:%hhX:%hhX:%hhx:%hhx:%hhx RSSI: %hhd Ch: %hhd\n", ap[i].get_ssid(),
                sec2str(ap[i].get_security()), ap[i].get_bssid()[0], ap[i].get_bssid()[1], ap[i].get_bssid()[2],
                ap[i].get_bssid()[3], ap[i].get_bssid()[4], ap[i].get_bssid()[5], ap[i].get_rssi(), ap[i].get_channel());
@@ -99,8 +109,13 @@ void http_demo(NetworkInterface *net)
     printf("Sending HTTP request to www.arm.com...\n");
 
     // Open a socket on the network interface, and create a TCP connection to www.arm.com
-    socket.open(net);
-    response = socket.connect("www.arm.com", 80);
+    response = socket.open(net);
+    if(0 != response) {
+        printf("socket.open() failed: %d\n", response);
+        return;
+    }
+
+    response = socket.connect("api.ipify.org", 80);
     if(0 != response) {
         printf("Error connecting: %d\n", response);
         socket.close();
@@ -108,24 +123,22 @@ void http_demo(NetworkInterface *net)
     }
 
     // Send a simple http request
-    char sbuffer[] = "GET / HTTP/1.1\r\nHost: www.arm.com\r\n\r\n";
+    char sbuffer[] = "GET / HTTP/1.1\r\nHost: api.ipify.org\r\nConnection: close\r\n\r\n";
     nsapi_size_t size = strlen(sbuffer);
-    response = 0;
-    while(size)
-    {
+
+    // Loop until whole request send
+    while(size) {
         response = socket.send(sbuffer+response, size);
         if (response < 0) {
             printf("Error sending data: %d\n", response);
             socket.close();
             return;
-        } else {
-            size -= response;
-            // Check if entire message was sent or not
-            printf("sent %d [%.*s]\n", response, strstr(sbuffer, "\r\n")-sbuffer, sbuffer);
         }
+        size -= response;
+        printf("sent %d [%.*s]\n", response, strstr(sbuffer, "\r\n")-sbuffer, sbuffer);
     }
 
-    // Recieve a simple http response and print out the response line
+    // Receieve a simple http response and print out the response line
     char rbuffer[64];
     response = socket.recv(rbuffer, sizeof rbuffer);
     if (response < 0) {
@@ -153,7 +166,7 @@ int main()
     printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
     int ret = wifi.connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
     if (ret != 0) {
-        printf("\nConnection error\n");
+        printf("\nConnection error: %d\n", ret);
         return -1;
     }
 
