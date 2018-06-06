@@ -29,24 +29,10 @@
             "target.device_has": ["EMAC"]
         },
         "DISCO_F413ZH": {
-            "wifi-shield": "WIFI_ISM43362",
-            "ism43362.wifi-miso": "PB_4",
-            "ism43362.wifi-mosi": "PB_5",
-            "ism43362.wifi-sclk": "PB_12",
-            "ism43362.wifi-nss": "PG_11",
-            "ism43362.wifi-reset": "PH_1",
-            "ism43362.wifi-dataready": "PG_12",
-            "ism43362.wifi-wakeup": "PB_15"
+            "wifi-shield": "WIFI_ISM43362"
         },
         "DISCO_L475VG_IOT01A": {
-            "wifi-shield": "WIFI_ISM43362",
-            "ism43362.wifi-miso": "PC_11",
-            "ism43362.wifi-mosi": "PC_12",
-            "ism43362.wifi-sclk": "PC_10",
-            "ism43362.wifi-nss": "PE_0",
-            "ism43362.wifi-reset": "PE_8",
-            "ism43362.wifi-dataready": "PE_1",
-            "ism43362.wifi-wakeup": "PB_13"
+            "wifi-shield": "WIFI_ISM43362"
         },
         "NUCLEO_L476RG": {
             "wifi-tx": "D8",
