@@ -155,7 +155,11 @@ int main()
 {
     int count = 0;
 
-    printf("WiFi example\n\n");
+    printf("WiFi example\n");
+
+#ifdef MBED_MAJOR_VERSION
+    printf("Mbed OS version %d.%d.%d\n\n", MBED_MAJOR_VERSION, MBED_MINOR_VERSION, MBED_PATCH_VERSION);
+#endif
 
     count = scan_demo(&wifi);
     if (count == 0) {
