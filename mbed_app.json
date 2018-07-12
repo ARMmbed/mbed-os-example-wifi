@@ -1,16 +1,20 @@
 {
     "config": {
-        "wifi-shield": {
+	"network-interface":{
+            "help": "Options are ETHERNET, WIFI_ESP8266, WIFI_WICED",
+            "value": "WIFI_WICED"
+        },
+	"wifi-shield": {
             "help": "Options are internal, WIFI_ESP8266, WIFI_ISM43362, WIFI_IDW0XX1",
             "value": "internal"
         },
         "wifi-ssid": {
             "help": "WiFi SSID",
-            "value": "\"SSID\""
+            "value": "\"AlanAP\""
         },
         "wifi-password": {
             "help": "WiFi Password",
-            "value": "\"PASSWORD\""
+            "value": "\"alan1234\""
         },
         "wifi-tx": {
             "help": "TX pin for serial connection to external device",
@@ -19,11 +23,40 @@
         "wifi-rx": {
             "help": "RX pin for serial connection to external device",
             "value": "D0"
+        },
+        "developer-mode": {
+            "help": "Enable Developer mode to skip Factory enrollment",
+            "value": 1
+        },
+        "button-resource": {
+            "help": "PinName for button.",
+            "value": "BUTTON1"
+        },
+        "button-unregister": {
+            "help": "PinName for button.",
+            "value": "NC"
+        },
+        "led-pinname": {
+            "help": "PinName for led, which is attached to led blink resource.",
+            "value": "LED_RED"
+        },
+        "trace-level": {
+            "help": "Options are TRACE_LEVEL_ERROR,TRACE_LEVEL_WARN,TRACE_LEVEL_INFO,TRACE_LEVEL_DEBUG",
+            "macro_name": "MBED_TRACE_MAX_LEVEL",
+            "value": "TRACE_LEVEL_INFO"
         }
     },
     "target_overrides": {
         "*": {
-            "platform.stdio-convert-newlines": true
+            "platform.stdio-convert-newlines"					: true
+        },
+	"MTB_ADV_WISE_1530": {
+            "target.extra_labels_add"                           : ["WICED", "CYW43362"],
+            "target.features_add"                               : ["LWIP"],
+	    "platform.stdio-convert-newlines"			: true,
+	    "platform.stdio-baud-rate"				: 115200,
+	    "target.stdio_uart_tx"				: "PA_9",
+	    "target.stdio_uart_rx"				: "PA_10"
         },
         "UBLOX_EVK_ODIN_W2": {
             "target.device_has": ["EMAC"]
