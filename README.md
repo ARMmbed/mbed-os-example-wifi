@@ -12,18 +12,20 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
 
 ### Supported hardware ###
 
-* [u-blox Odin board](https://os.mbed.com/platforms/ublox-EVK-ODIN-W2/) built-in Wi-Fi module.
-* [Realtek RTL8195AM](https://os.mbed.com/platforms/REALTEK-RTL8195AM/) built-in Wi-Fi module.
-* [ST DISCO IOT board](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
-* [ST DISCO_F413ZH board](https://os.mbed.com/platforms/ST-Discovery-F413H/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
-* [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) Wi-Fi expansion board using pins D8 and D2 _(of the Arduino connector)_.
-* [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) Wi-Fi expansion board using pins PA_9 and PA_10 _(of the Morpho connector)_.
-* [NUCLEO-F429ZI](https://os.mbed.com/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 and D0.
-* [NUCLEO-L476RG](https://os.mbed.com/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 and D2.
-* Other Mbed targets with an ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) expansion board.
-  *(The Mbed target board the Wi-Fi shield connects to shouldn't have any other network interface, for example Ethernet.)*
-
-ESP8266 is a fallback option if the build is for unsupported platform.
+* All Mbed OS boards with build-in Wi-Fi module:
+    * [u-blox ODIN-W2](https://os.mbed.com/platforms/ublox-EVK-ODIN-W2/)
+    * [Realtek RTL8195AM](https://os.mbed.com/platforms/REALTEK-RTL8195AM/)
+    * [ST DISCO IOT board](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
+    * [ST DISCO_F413ZH board](https://os.mbed.com/platforms/ST-Discovery-F413H/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
+    * [Advantech WISE-150](https://os.mbed.com/modules/advantech-wise-1530/)
+    * USI WM-BN-BM-22
+    * MxChip EMW3166
+* Boards with external WiFi shields.
+    * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) Wi-Fi expansion board using pins D8 and D2 _(of the Arduino connector)_.
+    * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) Wi-Fi expansion board using pins PA_9 and PA_10 _(of the Morpho connector)_.
+    * [NUCLEO-F429ZI](https://os.mbed.com/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 and D0.
+    * [NUCLEO-L476RG](https://os.mbed.com/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 and D2.
+    * Other Mbed targets with an ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) expansion board.
 
 #### Connecting the ESP8266 ####
 
@@ -43,8 +45,8 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
    mbed import mbed-os-example-wifi
    cd mbed-os-example-wifi
    ```
-   
-2. Configure the Wi-Fi shield to use.
+
+1. Configure the Wi-Fi shield to use.
 
    Edit ```mbed_app.json``` to include the correct Wi-Fi shield, SSID and password:
 
@@ -66,52 +68,48 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
    ```
 
    Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```) and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
-   
+
    For WIFI_ISM43362, ignore the value of `wifi-shield` as it is already overrides per supported targets.
 
    For built-in Wi-Fi, ignore the value of `wifi-shield`.
 
-3. Compile and generate binary.
+1. Compile and generate binary.
+    For example, for `GCC`:
+    ```
+    mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
+    ```
 
-   For example, for `GCC`:
-
-   ```
-   mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
-   ```
-   
- 4. Open a serial console session with the target platform using the following parameters:
- 
+1. Open a serial console session with the target platform using the following parameters:
     * **Baud rate:** 9600
     * **Data bits:** 8
     * **Stop bits:** 1
     * **Parity:** None
- 
- 5. Copy or drag the application `mbed-os-example-wifi.bin` in the folder `mbed-os-example-wifi/BUILD/<TARGET NAME>/<PLATFORM NAME>` onto the target board.
- 
- 6. The serial console should display a similar output to below, indicating a successful Wi-Fi connection:
- 
- ```
- WiFi example
 
-Scan:
-Network: Dave Hot Spot secured: Unknown BSSID: 00:01:02:03:04:05 RSSI: -58 Ch: 1
-1 network available.
+1. Copy or drag the application `mbed-os-example-wifi.bin` in the folder `mbed-os-example-wifi/BUILD/<TARGET NAME>/<PLATFORM NAME>` onto the target board.
 
-Connecting...
-Success
+1. The serial console should display a similar output to below, indicating a successful Wi-Fi connection:
+    ```
+    WiFi example
 
-MAC: 00:01:02:03:04:05
-IP: 192.168.0.5
-Netmask: 255.255.255.0
-Gateway: 192.168.0.1
-RSSI: -27
+    Scan:
+    Network: Dave Hot Spot secured: Unknown BSSID: 00:01:02:03:04:05 RSSI: -58 Ch: 1
+    1 network available.
 
-Sending HTTP request to www.arm.com...
-sent 38 [GET / HTTP/1.1]
-recv 64 [HTTP/1.1 301 Moved Permanently]
+    Connecting...
+    Success
 
-Done
-```
+    MAC: 00:01:02:03:04:05
+    IP: 192.168.0.5
+    Netmask: 255.255.255.0
+    Gateway: 192.168.0.1
+    RSSI: -27
+
+    Sending HTTP request to www.arm.com...
+    sent 38 [GET / HTTP/1.1]
+    recv 64 [HTTP/1.1 301 Moved Permanently]
+
+    Done
+    ```
 
 ## Troubleshooting
 
