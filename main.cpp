@@ -17,35 +17,42 @@
 #include "mbed.h"
 #include "TCPSocket.h"
 
-#define WIFI_ESP8266    1
-#define WIFI_IDW0XX1    2
-#define WIFI_ISM43362   3
+#define internal        1
+#define WIFI_ESP8266    2
+#define WIFI_IDW0XX1    3
+#define WIFI_ISM43362   4
 
-#if TARGET_UBLOX_EVK_ODIN_W2
-#include "OdinWiFiInterface.h"
-OdinWiFiInterface wifi;
-
-#elif TARGET_REALTEK_RTL8195AM
-#include "RTWInterface.h"
-RTWInterface wifi;
-
-#else // External WiFi modules
+WiFiInterface *wifi;
 
 #if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
+
 #include "ESP8266Interface.h"
-ESP8266Interface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
+
+WiFiInterface *WiFiInterface::get_default_instance() {
+    static ESP8266Interface esp(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
+    return &esp;
+}
 
 #elif MBED_CONF_APP_WIFI_SHIELD == WIFI_ISM43362
+
 #include "ISM43362Interface.h"
-ISM43362Interface wifi;
+
+WiFiInterface *WiFiInterface::get_default_instance() {
+    static ISM43362Interface ism;
+    return &ism;
+}
 
 #elif MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW0XX1
-#include "SpwfSAInterface.h"
-SpwfSAInterface wifi(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
 
-#endif // MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW0XX1
+#include "SpwfSAInterface.h"
+
+WiFiInterface *WiFiInterface::get_default_instance() {
+    static SpwfSAInterface spwf(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
+    return &spwf;
+}
 
 #endif
+
 
 const char *sec2str(nsapi_security_t sec)
 {
@@ -161,29 +168,35 @@ int main()
     printf("Mbed OS version %d.%d.%d\n\n", MBED_MAJOR_VERSION, MBED_MINOR_VERSION, MBED_PATCH_VERSION);
 #endif
 
-    count = scan_demo(&wifi);
+    wifi = WiFiInterface::get_default_instance();
+
+    count = scan_demo(wifi);
     if (count == 0) {
         printf("No WIFI APNs found - can't continue further.\n");
         return -1;
     }
 
     printf("\nConnecting to %s...\n", MBED_CONF_APP_WIFI_SSID);
-    int ret = wifi.connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
+    int ret = wifi->connect(MBED_CONF_APP_WIFI_SSID, MBED_CONF_APP_WIFI_PASSWORD, NSAPI_SECURITY_WPA_WPA2);
     if (ret != 0) {
         printf("\nConnection error: %d\n", ret);
         return -1;
     }
 
     printf("Success\n\n");
-    printf("MAC: %s\n", wifi.get_mac_address());
-    printf("IP: %s\n", wifi.get_ip_address());
-    printf("Netmask: %s\n", wifi.get_netmask());
-    printf("Gateway: %s\n", wifi.get_gateway());
-    printf("RSSI: %d\n\n", wifi.get_rssi());
+    printf("MAC: %s\n", wifi->get_mac_address());
+    printf("IP: %s\n", wifi->get_ip_address());
+    printf("Netmask: %s\n", wifi->get_netmask());
+    printf("Gateway: %s\n", wifi->get_gateway());
+    printf("RSSI: %d\n\n", wifi->get_rssi());
 
-    http_demo(&wifi);
+    http_demo(wifi);
 
-    wifi.disconnect();
+    wifi->disconnect();
+
+#if MBED_CONF_APP_WIFI_SHIELD != internal
+    delete wifi;
+#endif
 
     printf("\nDone\n");
 }
