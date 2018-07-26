@@ -169,6 +169,10 @@ int main()
 #endif
 
     wifi = WiFiInterface::get_default_instance();
+    if (!wifi) {
+        printf("ERROR: No WiFiInterface found.\n");
+        return -1;
+    }
 
     count = scan_demo(wifi);
     if (count == 0) {
