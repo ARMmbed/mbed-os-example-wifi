@@ -198,9 +198,5 @@ int main()
 
     wifi->disconnect();
 
-#if MBED_CONF_APP_WIFI_SHIELD != internal
-    delete wifi;
-#endif
-
     printf("\nDone\n");
 }
