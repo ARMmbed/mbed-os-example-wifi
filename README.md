@@ -27,6 +27,18 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
     * [NUCLEO-L476RG](https://os.mbed.com/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 and D2.
     * Other Mbed targets with an ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) expansion board.
 
+#### Adding connectivity driver
+
+If the target does not have internal WiFi driver, or Mbed OS does not supply one, you need to add driver to your application and configure it to provide default WiFi interface.
+
+```
+mbed add <driver>
+```
+
+For example adding ISM43362 driver `mbed add wifi-ism43362` or ESP8266 `mbed add esp8266-driver`
+
+Then pin names need to be configured as instructed in the drivers README file.
+
 #### Connecting the ESP8266 ####
 
 To connect the ESP8266 module to your development board, look at the [ESP8266 Cookbook page](https://developer.mbed.org/users/4180_1/notebook/using-the-esp8266-with-the-mbed-lpc1768/). In general, this means hooking up the ESP8266 TX pin to `D0` and the ESP8266 RX pin to `D1` on your development board.

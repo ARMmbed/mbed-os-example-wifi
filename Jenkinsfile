@@ -13,11 +13,10 @@ if (params.mbed_os_revision == '') {
 
 // List of targets with supported RF shields to compile
 def targets = [
-  "UBLOX_EVK_ODIN_W2": ["builtin"],
-  "REALTEK_RTL8195AM": ["builtin"],
-  "K64F": ["WIFI_ESP8266"],
-  "NUCLEO_F401RE": ["WIFI_IDW0XX1"],
-  "NUCLEO_F429ZI": ["WIFI_ESP8266"]
+  "UBLOX_EVK_ODIN_W2": ["internal"],
+  "REALTEK_RTL8195AM": ["internal"],
+  "K64F": ["esp8266-driver"],
+  "NUCLEO_F429ZI": ["esp8266-driver"]
   ]
 
 // Map toolchains to compilers
@@ -29,9 +28,8 @@ def toolchains = [
 
 // Supported RF shields
 def radioshields = [
-  "builtin",
-  "WIFI_IDW0XX1",
-  "WIFI_ESP8266"
+  "internal",
+  "esp8266-driver"
   ]
 
 def stepsForParallel = [:]
@@ -67,11 +65,6 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
           checkout scm
           def config_file = "mbed_app.json"
 
-          if ("${radioShield}" != "internal") {
-            // Replace default rf shield
-            execute("sed -i 's/\"value\": \"internal\"/\"value\": \"${radioShield}\"/' ${config_file}")
-          }
-
           // Set mbed-os to revision received as parameter
           execute ("mbed deploy --protocol ssh")
           if (params.mbed_os_revision != '') {
@@ -85,6 +78,12 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
             }
           }
           execute("mbed new .")
+
+          if ("${radioShield}" != "internal") {
+            // Replace default rf shield
+            execute("mbed add ${radioShield}")
+          }
+
           execute ("mbed compile --build out/${target}_${toolchain}_${radioShield}/ -m ${target} -t ${toolchain} -c --app-config ${config_file}")
         }
         stash name: "${target}_${toolchain}_${radioShield}", includes: '**/mbed-os-example-wifi.bin'
