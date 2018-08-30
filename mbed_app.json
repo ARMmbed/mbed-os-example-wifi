@@ -1,9 +1,5 @@
 {
     "config": {
-        "wifi-shield": {
-            "help": "Options are internal, WIFI_ESP8266, WIFI_ISM43362, WIFI_IDW0XX1",
-            "value": "internal"
-        },
         "wifi-ssid": {
             "help": "WiFi SSID",
             "value": "\"SSID\""
@@ -11,33 +7,11 @@
         "wifi-password": {
             "help": "WiFi Password",
             "value": "\"PASSWORD\""
-        },
-        "wifi-tx": {
-            "help": "TX pin for serial connection to external device",
-            "value": "D1"
-        },
-        "wifi-rx": {
-            "help": "RX pin for serial connection to external device",
-            "value": "D0"
         }
     },
     "target_overrides": {
         "*": {
             "platform.stdio-convert-newlines": true
-        },
-        "DISCO_F413ZH": {
-            "wifi-shield": "WIFI_ISM43362"
-        },
-        "DISCO_L475VG_IOT01A": {
-            "wifi-shield": "WIFI_ISM43362"
-        },
-        "NUCLEO_L476RG": {
-            "wifi-tx": "D8",
-            "wifi-rx": "D2"
-        },
-        "NUCLEO_F401RE": {
-            "wifi-tx": "D8",
-            "wifi-rx": "D2"
         }
     }
 }

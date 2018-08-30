@@ -17,42 +17,7 @@
 #include "mbed.h"
 #include "TCPSocket.h"
 
-#define internal        1
-#define WIFI_ESP8266    2
-#define WIFI_IDW0XX1    3
-#define WIFI_ISM43362   4
-
 WiFiInterface *wifi;
-
-#if MBED_CONF_APP_WIFI_SHIELD == WIFI_ESP8266
-
-#include "ESP8266Interface.h"
-
-WiFiInterface *WiFiInterface::get_default_instance() {
-    static ESP8266Interface esp(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
-    return &esp;
-}
-
-#elif MBED_CONF_APP_WIFI_SHIELD == WIFI_ISM43362
-
-#include "ISM43362Interface.h"
-
-WiFiInterface *WiFiInterface::get_default_instance() {
-    static ISM43362Interface ism;
-    return &ism;
-}
-
-#elif MBED_CONF_APP_WIFI_SHIELD == WIFI_IDW0XX1
-
-#include "SpwfSAInterface.h"
-
-WiFiInterface *WiFiInterface::get_default_instance() {
-    static SpwfSAInterface spwf(MBED_CONF_APP_WIFI_TX, MBED_CONF_APP_WIFI_RX);
-    return &spwf;
-}
-
-#endif
-
 
 const char *sec2str(nsapi_security_t sec)
 {
