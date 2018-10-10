@@ -79,11 +79,6 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
           }
           execute("mbed new .")
 
-          if ("${radioShield}" != "internal") {
-            // Replace default rf shield
-            execute("mbed add ${radioShield}")
-          }
-
           execute ("mbed compile --build out/${target}_${toolchain}_${radioShield}/ -m ${target} -t ${toolchain} -c --app-config ${config_file}")
         }
         stash name: "${target}_${toolchain}_${radioShield}", includes: '**/mbed-os-example-wifi.bin'
