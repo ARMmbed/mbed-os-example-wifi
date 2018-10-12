@@ -35,7 +35,7 @@ If the target does not have internal WiFi driver, or Mbed OS does not supply one
 mbed add <driver>
 ```
 
-For example adding ISM43362 driver `mbed add wifi-ism43362` or ESP8266 `mbed add esp8266-driver`
+For example adding ISM43362 driver `mbed add wifi-ism43362` or ESP8266 `mbed add esp8266-driver` or X-Nucleo-IDW01M1 driver `mbed add wifi-x-nucleo-idw01m1`
 
 Then pin names need to be configured as instructed in the drivers README file.
 
@@ -58,32 +58,37 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
    cd mbed-os-example-wifi
    ```
 
-1. Configure the Wi-Fi shield to use.
+1. Configure the Wi-Fi shield and settings.
 
    Edit ```mbed_app.json``` to include the correct Wi-Fi shield, SSID and password:
 
    ```
-       "config": {
- 	  "wifi-shield": {
-               "help": "Options are internal, WIFI_ESP8266, WIFI_ISM43362, WIFI_IDW0XX1",
-               "value": "WIFI_ESP8266"
-        	  },
-           "wifi-ssid": {
-               "help": "WiFi SSID",
-               "value": "\"SSID\""
-           },
-           "wifi-password": {
-               "help": "WiFi Password",
-               "value": "\"Password\""
-           }
-       },
+{
+    "config": {
+        "wifi-ssid": {
+            "help": "WiFi SSID",
+            "value": "\"SSID\""
+        },
+        "wifi-password": {
+            "help": "WiFi Password",
+            "value": "\"PASSWORD\""
+        }
+    },
+    "target_overrides": {
+        "*": {
+            "platform.stdio-convert-newlines": true,
+            "esp8266.provide-default" : false
+        }
+    }
+}
+
    ```
+
+   For build-in WiFi, you do not need to set any `provide-default` values. Those are required
+   if you use external WiFi shield.
 
    Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```) and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
 
-   For WIFI_ISM43362, ignore the value of `wifi-shield` as it is already overrides per supported targets.
-
-   For built-in Wi-Fi, ignore the value of `wifi-shield`.
 
 1. Compile and generate binary.
     For example, for `GCC`:
