@@ -7,14 +7,6 @@
         "wifi-password": {
             "help": "WiFi Password",
             "value": "\"PASSWORD\""
-        },
-        "wifi-tx": {
-            "help": "TX pin for serial connection to external device",
-            "value": "PA_9"
-        },
-        "wifi-rx": {
-            "help": "RX pin for serial connection to external device",
-            "value": "PA_10"
         }
     },
     "target_overrides": {
@@ -22,6 +14,8 @@
             "platform.stdio-convert-newlines": true,
             "idw0xx1.expansion-board": "IDW01M1",
             "idw0xx1.provide-default": true,
+            "idw0xx1.tx": "PA_9",
+            "idw0xx1.rx": "PA_10",
             "drivers.uart-serial-txbuf-size": 730,
             "drivers.uart-serial-rxbuf-size": 730
         },
