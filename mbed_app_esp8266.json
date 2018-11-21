@@ -7,14 +7,6 @@
         "wifi-password": {
             "help": "WiFi Password",
             "value": "\"PASSWORD\""
-        },
-        "wifi-tx": {
-            "help": "TX pin for serial connection to external device",
-            "value": "D1"
-        },
-        "wifi-rx": {
-            "help": "RX pin for serial connection to external device",
-            "value": "D0"
         }
     },
     "target_overrides": {

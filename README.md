@@ -59,10 +59,9 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
    ```
 
 1. Configure the Wi-Fi shield and settings.
-
    Edit ```mbed_app.json``` to include the correct Wi-Fi shield, SSID and password:
 
-   ```
+```json
 {
     "config": {
         "wifi-ssid": {
@@ -81,8 +80,7 @@ To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/e
         }
     }
 }
-
-   ```
+```
 
    For build-in WiFi, you do not need to set any `provide-default` values. Those are required
    if you use external WiFi shield.
