@@ -34,7 +34,8 @@ If the target does not have internal WiFi driver, or Mbed OS does not supply one
 mbed add <driver>
 ```
 
-For example adding ISM43362 driver `mbed add wifi-ism43362` or ESP8266 `mbed add esp8266-driver` or X-Nucleo-IDW01M1 driver `mbed add wifi-x-nucleo-idw01m1`
+For example adding ISM43362 driver `mbed add wifi-ism43362` or X-Nucleo-IDW01M1 driver `mbed add wifi-x-nucleo-idw01m1`
+The ESP8266 driver is already suplied by Mbed OS.
 
 Then pin names need to be configured as instructed in the drivers README file.
 
