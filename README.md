@@ -4,9 +4,9 @@ Wi-Fi example for Mbed OS
 
 ## Getting started with the Wi-Fi API ##
 
-This is an example of a Wi-Fi application using the Wi-Fi and network socket APIs that [Mbed OS](https://github.com/ARMmbed/mbed-os) provides.
+This is an example of a Wi-Fi application using the Wi-Fi APIs that [Mbed OS](https://github.com/ARMmbed/mbed-os) provides.
 
-The program brings up the Wi-Fi and the underlying network interface and uses it to scan available networks, connects to a network, prints interface and connection details and performs an HTTP operation.
+The program brings up the Wi-Fi and the underlying network interface and uses it to scan available networks, connects to a network and prints interface and connection details.
 
 For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://os.mbed.com/docs/latest/reference/wi-fi.html) documentation.
 
@@ -38,14 +38,6 @@ For example adding ISM43362 driver `mbed add wifi-ism43362` or X-Nucleo-IDW01M1 
 The ESP8266 driver is already suplied by Mbed OS.
 
 Then pin names need to be configured as instructed in the drivers README file.
-
-#### Connecting the ESP8266 ####
-
-To connect the ESP8266 module to your development board, look at the [ESP8266 Cookbook page](https://developer.mbed.org/users/4180_1/notebook/using-the-esp8266-with-the-mbed-lpc1768/). In general, this means hooking up the ESP8266 TX pin to `D0` and the ESP8266 RX pin to `D1` on your development board.
-
-#### Connecting the X-NUCLEO-IDW0XX1 ####
-
-To connect the [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://developer.mbed.org/components/X-NUCLEO-IDW01M1/) expansion board to your NUCLEO development board, plug the expansion board on top of the NUCLEO board using the Arduino or Morpho connector.
 
 ##  Getting started ##
 
