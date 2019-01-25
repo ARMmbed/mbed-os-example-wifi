@@ -2,6 +2,8 @@
 
 Wi-Fi example for Mbed OS
 
+(Note: To see this example in a rendered form you can import into the Arm Mbed Online Compiler, please see [the documentation](https://os.mbed.com/docs/mbed-os/latest/apis/wi-fi.html#wi-fi-example).)
+
 ## Getting started with the Wi-Fi API ##
 
 This is an example of a Wi-Fi application using the Wi-Fi APIs that [Mbed OS](https://github.com/ARMmbed/mbed-os) provides.
