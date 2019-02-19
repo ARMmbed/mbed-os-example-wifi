@@ -18,9 +18,6 @@
             "idw0xx1.rx": "PA_10",
             "drivers.uart-serial-txbuf-size": 730,
             "drivers.uart-serial-rxbuf-size": 730
-        },
-        "UBLOX_EVK_ODIN_W2": {
-            "target.device_has": ["EMAC"]
         }
     }
 }
