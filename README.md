@@ -111,10 +111,6 @@ Then pin names need to be configured as instructed in the drivers README file.
     Gateway: 192.168.0.1
     RSSI: -27
 
-    Sending HTTP request to www.arm.com...
-    sent 38 [GET / HTTP/1.1]
-    recv 64 [HTTP/1.1 301 Moved Permanently]
-
     Done
     ```
 
