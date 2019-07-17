@@ -14,7 +14,7 @@ if (params.mbed_os_revision == '') {
 // List of targets with supported RF shields to compile
 def targets = [
   "UBLOX_EVK_ODIN_W2": ["internal"],
-  "REALTEK_RTL8195AM": ["internal"],
+  //"REALTEK_RTL8195AM": ["internal"],  // Disabled from Mbed OS after ArmCC6
   "K64F": ["esp8266-driver"],
   "NUCLEO_F429ZI": ["esp8266-driver"]
   ]
