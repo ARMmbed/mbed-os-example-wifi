@@ -1,0 +1,25 @@
+{
+    "config": {
+        "wifi-ssid": {
+            "help": "WiFi SSID",
+            "value": "\"SSID\""
+        },
+        "wifi-password": {
+            "help": "WiFi Password",
+            "value": "\"PASSWORD\""
+        }
+    },
+    "target_overrides": {
+        "*": {
+            "platform.stdio-convert-newlines": true,
+            "wizfi310.debug": false,
+            "wizfi310.provide-default": true, 
+            "wizfi310.tx" : "D1",
+            "wizfi310.rx" : "D0",
+            "wizfi310.cts": "D6",
+            "wizfi310.rts": "D7",
+            "drivers.uart-serial-txbuf-size": 750,
+            "drivers.uart-serial-rxbuf-size": 750
+        }
+    }
+}
