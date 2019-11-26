@@ -101,9 +101,13 @@ int main()
 
     printf("Success\n\n");
     printf("MAC: %s\n", wifi->get_mac_address());
-    printf("IP: %s\n", wifi->get_ip_address());
-    printf("Netmask: %s\n", wifi->get_netmask());
-    printf("Gateway: %s\n", wifi->get_gateway());
+    SocketAddress a;
+    wifi->get_ip_address(&a);
+    printf("IP: %s\n", a.get_ip_address());
+    wifi->get_netmask(&a);
+    printf("Netmask: %s\n", a.get_ip_address());
+    wifi->get_gateway(&a);
+    printf("Gateway: %s\n", a.get_ip_address());
     printf("RSSI: %d\n\n", wifi->get_rssi());
 
     wifi->disconnect();
