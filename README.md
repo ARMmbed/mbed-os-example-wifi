@@ -74,7 +74,7 @@ Then pin names need to be configured as instructed in the drivers README file.
 }
 ```
 
-   For build-in WiFi, you do not need to set any `provide-default` values. Those are required
+   For built-in WiFi, you do not need to set any `provide-default` values. Those are required
    if you use external WiFi shield.
 
    Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```) and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
