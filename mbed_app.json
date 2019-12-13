@@ -12,6 +12,12 @@
     "target_overrides": {
         "*": {
             "platform.stdio-convert-newlines": true
+        },
+        "DISCO_L475VG_IOT01A": {
+            "ism43362.provide-default": true
+        },
+        "DISCO_F413ZH": {
+            "ism43362.provide-default": true
         }
     }
 }
