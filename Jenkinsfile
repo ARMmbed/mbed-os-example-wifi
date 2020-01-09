@@ -1,22 +1,31 @@
 properties ([[$class: 'ParametersDefinitionProperty', parameterDefinitions: [
-  [$class: 'StringParameterDefinition', name: 'mbed_os_revision', defaultValue: '', description: 'Revision of mbed-os to build. Use format "pull/PR-NUMBER/head" to access mbed-os PR']
+  [$class: 'StringParameterDefinition', name: 'mbed_os_revision', defaultValue: '', description: 'Revision of mbed-os to build. Use format "pull/PR-NUMBER/head" to access mbed-os PR'],
+  [$class: 'BooleanParameterDefinition', name: 'smoke_test', defaultValue: true, description: 'Runs HW smoke test with example']
   ]]])
 
-if (params.mbed_os_revision == '') {
-  echo 'Use mbed OS revision from mbed-os.lib'
+if (env.MBED_OS_REVISION == null) {
+  echo 'First run in this branch, using default parameter values'
+  env.MBED_OS_REVISION = ''
+}
+if (env.MBED_OS_REVISION == '') {
+  echo 'Using mbed OS revision from mbed-os.lib'
 } else {
-  echo "Use mbed OS revisiong ${params.mbed_os_revision}"
-  if (params.mbed_os_revision.matches('pull/\\d+/head')) {
+  echo "Using given mbed OS revision: ${env.MBED_OS_REVISION}"
+  if (env.MBED_OS_REVISION.matches('pull/\\d+/head')) {
     echo "Revision is a Pull Request"
   }
 }
 
+// Map RaaS instances to corresponding test suites
+def raas = [
+  "wifi_smoke_disco_l475vg_iot01a.json": "mervi"
+]
+
 // List of targets with supported RF shields to compile
 def targets = [
   "UBLOX_EVK_ODIN_W2": ["internal"],
-  //"REALTEK_RTL8195AM": ["internal"],  // Disabled from Mbed OS after ArmCC6
   "K64F": ["esp8266-driver"],
-  "NUCLEO_F429ZI": ["esp8266-driver"]
+  "DISCO_L475VG_IOT01A": ["wifi-ism43362"]
   ]
 
 // Map toolchains to compilers
@@ -29,7 +38,8 @@ def toolchains = [
 // Supported RF shields
 def radioshields = [
   "internal",
-  "esp8266-driver"
+  "esp8266-driver",
+  "wifi-ism43362"
   ]
 
 def stepsForParallel = [:]
@@ -52,8 +62,27 @@ for (int i = 0; i < targets.size(); i++) {
     }
 }
 
+def parallelRunSmoke = [:]
+
+// Need to compare boolean against string value
+if (params.smoke_test == true) {
+  echo "Running smoke tests"
+  // Generate smoke tests based on suite amount
+  for(int i = 0; i < raas.size(); i++) {
+    def suite_to_run = raas.keySet().asList().get(i)
+    def raasName = raas.get(suite_to_run)
+
+    // Parallel execution needs unique step names. Remove .json file ending.
+    def smokeStep = "${raasName} ${suite_to_run.substring(0, suite_to_run.indexOf('.'))}"
+    parallelRunSmoke[smokeStep] = run_smoke(raasName, suite_to_run, toolchains, targets, radioshields)
+  }
+} else {
+  echo "Skipping smoke tests"
+}
+
 timestamps {
   parallel stepsForParallel
+  parallel parallelRunSmoke
 }
 
 def buildStep(target, compilerLabel, toolchain, radioShield) {
@@ -64,6 +93,17 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
         dir("mbed-os-example-wifi") {
           checkout scm
           def config_file = "mbed_app.json"
+
+          if ("${target}" == "K64F") {
+            config_file = "mbed_app_esp8266.json"
+          }
+
+          dir("mbed-os-systemtest") {
+            git "git@github.com:ARMmbed/mbed-os-systemtest.git"
+          }
+
+          //Update json files for internal tests
+          execute("python mbed-os-systemtest/wifi/configuration-scripts/update-mbed-app-json.py")
 
           // Set mbed-os to revision received as parameter
           execute ("mbed deploy --protocol ssh")
@@ -79,11 +119,58 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
           }
           execute("mbed new .")
 
+          if ("${radioShield}" == "wifi-ism43362") {
+            execute ("mbed add wifi-ism43362")
+          }
+
           execute ("mbed compile --build out/${target}_${toolchain}_${radioShield}/ -m ${target} -t ${toolchain} -c --app-config ${config_file}")
         }
         stash name: "${target}_${toolchain}_${radioShield}", includes: '**/mbed-os-example-wifi.bin'
         archive '**/mbed-os-example-wifi.bin'
         step([$class: 'WsCleanup'])
+      }
+    }
+  }
+}
+
+def run_smoke(raasName, suite_to_run, toolchains, targets, radioshields) {
+  return {
+    env.RAAS_USERNAME = "ci"
+    env.RAAS_PASSWORD = "ci"
+    // Remove .json from suite name
+    def suiteName = suite_to_run.substring(0, suite_to_run.indexOf('.'))
+    stage ("smoke_${raasName}_${suiteName}") {
+      //node is actually the type of machine, i.e., mesh-test boild down to linux
+      node ("linux") {
+        deleteDir()
+        dir("mbed-clitest") {
+          git "git@github.com:ARMmbed/mbed-clitest.git"
+          execute("git checkout ${env.LATEST_CLITEST_STABLE_REL}")
+          dir("mbed-clitest-suites") {
+            git "git@github.com:ARMmbed/mbed-clitest-suites.git"
+            dir("cellular") {
+              git "git@github.com:ARMmbed/mbed-clitest-cellular.git"
+            }
+          }
+
+          for (int i = 0; i < targets.size(); i++) {
+            for(int j = 0; j < toolchains.size(); j++) {
+              for(int k = 0; k < radioshields.size(); k++) {
+                def target = targets.get(i)
+                def toolchain = toolchains.keySet().asList().get(j)
+                def radioshield = radioshields.get(k)
+                def allowed_shields = targets.get(target)
+                if(allowed_shields.contains(radioshield)) {
+                  unstash "${target}_${toolchain}_${radioshield}"
+                }
+              }
+            }
+          }
+          execute("python clitest.py --suitedir mbed-clitest-suites/suites/ --suite ${suite_to_run} --type hardware --reset \
+                  --raas https://${raasName}.mbedcloudtesting.com:443 --tcdir mbed-clitest-suites/cellular --raas_queue --raas_queue_timeout 3600 \
+                  --raas_share_allocs --failure_return_value -v -w --log log_${raasName}_${suiteName}")
+          archive "log_${raasName}_${suiteName}/**/*"
+        }
       }
     }
   }
