@@ -155,10 +155,11 @@ def run_smoke(raasName, suite_to_run, toolchains, targets, radioshields) {
           for (int i = 0; i < targets.size(); i++) {
             for(int j = 0; j < toolchains.size(); j++) {
               for(int k = 0; k < radioshields.size(); k++) {
-                def target = targets.get(i)
+                def target = targets.keySet().asList().get(i)
+                def allowed_shields = targets.get(target)
                 def toolchain = toolchains.keySet().asList().get(j)
                 def radioshield = radioshields.get(k)
-                def allowed_shields = targets.get(target)
+
                 if(allowed_shields.contains(radioshield)) {
                   unstash "${target}_${toolchain}_${radioshield}"
                 }
