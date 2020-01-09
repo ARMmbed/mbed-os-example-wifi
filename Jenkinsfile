@@ -90,6 +90,9 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
     stage ("${target}_${compilerLabel}_${radioShield}") {
       node ("${compilerLabel}") {
         deleteDir()
+        dir("mbed-os-systemtest") {
+          git "git@github.com:ARMmbed/mbed-os-systemtest.git"
+        }
         dir("mbed-os-example-wifi") {
           checkout scm
           def config_file = "mbed_app.json"
@@ -98,12 +101,8 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
             config_file = "mbed_app_esp8266.json"
           }
 
-          dir("mbed-os-systemtest") {
-            git "git@github.com:ARMmbed/mbed-os-systemtest.git"
-          }
-
           //Update json files for internal tests
-          execute("python mbed-os-systemtest/wifi/configuration-scripts/update-mbed-app-json.py")
+          execute("python ../mbed-os-systemtest/wifi/configuration-scripts/update-mbed-app-json.py")
 
           // Set mbed-os to revision received as parameter
           execute ("mbed deploy --protocol ssh")
