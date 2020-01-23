@@ -1,0 +1,13 @@
+WiFi example
+Mbed OS version
+Scan:
+Network:
+\d+ networks available.
+Connecting to
+Success
+MAC: (?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}
+IP: (?:[0-9]{1,3}\.){3}[0-9]{1,3}
+Netmask: (?:[0-9]{1,3}\.){3}[0-9]{1,3}
+Gateway: (?:[0-9]{1,3}\.){3}[0-9]{1,3}
+RSSI: -?\d+
+Done
