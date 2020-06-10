@@ -1,3 +1,4 @@
+![](./resources/official_armmbed_example_badge.png)
 # mbed-os-example-wifi #
 
 Wi-Fi example for Mbed OS
