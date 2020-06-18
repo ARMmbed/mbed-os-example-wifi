@@ -23,23 +23,7 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
     * USI WM-BN-BM-22
     * MxChip EMW3166
 * Boards with external WiFi shields.
-    * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) Wi-Fi expansion board using pins D8 and D2 _(of the Arduino connector)_.
-    * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) Wi-Fi expansion board using pins PA_9 and PA_10 _(of the Morpho connector)_.
     * [NUCLEO-F429ZI](https://os.mbed.com/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 and D0.
-    * Other Mbed targets with an ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) expansion board.
-
-#### Adding connectivity driver
-
-If the target does not have internal WiFi driver, or Mbed OS does not supply one, you need to add driver to your application and configure it to provide default WiFi interface.
-
-```
-mbed add <driver>
-```
-
-For example adding ISM43362 driver `mbed add wifi-ism43362` or X-Nucleo-IDW01M1 driver `mbed add wifi-x-nucleo-idw01m1`
-The ESP8266 driver is already suplied by Mbed OS.
-
-Then pin names need to be configured as instructed in the drivers README file.
 
 ##  Getting started ##
 
