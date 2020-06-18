@@ -34,6 +34,8 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
    cd mbed-os-example-wifi
    ```
 
+   Or if you fetched the example with `git clone`, run `mbed deploy` inside the cloned repository.
+
 1. Configure the Wi-Fi shield and settings.
    Edit ```mbed_app.json``` to include the correct Wi-Fi shield, SSID and password:
 
