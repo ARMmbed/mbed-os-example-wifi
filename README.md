@@ -15,13 +15,8 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
 ### Supported hardware ###
 
 * All Mbed OS boards with build-in Wi-Fi module:
-    * [u-blox ODIN-W2](https://os.mbed.com/platforms/ublox-EVK-ODIN-W2/)
-    * [Realtek RTL8195AM](https://os.mbed.com/platforms/REALTEK-RTL8195AM/)
     * [ST DISCO IOT board](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
     * [ST DISCO_F413ZH board](https://os.mbed.com/platforms/ST-Discovery-F413H/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
-    * [Advantech WISE-150](https://os.mbed.com/modules/advantech-wise-1530/)
-    * USI WM-BN-BM-22
-    * MxChip EMW3166
 * Boards with external WiFi shields.
     * [NUCLEO-F429ZI](https://os.mbed.com/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 and D0.
 
@@ -63,13 +58,13 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
    For build-in WiFi, you do not need to set any `provide-default` values. Those are required
    if you use external WiFi shield.
 
-   Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```) and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
+   A sample ```mbed_app.json``` file is provided for ESP8266 (```mbed_app_esp8266.json```).
 
 
 1. Compile and generate binary.
     For example, for `GCC`:
     ```
-    mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
+    mbed compile -t GCC_ARM -m DISCO_L475VG_IOT01A
     ```
 
 1. Open a serial console session with the target platform using the following parameters:
