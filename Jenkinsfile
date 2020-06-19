@@ -23,7 +23,6 @@ def raas = [
 
 // List of targets with supported RF shields to compile
 def targets = [
-  "UBLOX_EVK_ODIN_W2": ["internal"],
   "K64F": ["esp8266-driver"],
   "DISCO_L475VG_IOT01A": ["wifi-ism43362"]
   ]
@@ -117,10 +116,6 @@ def buildStep(target, compilerLabel, toolchain, radioShield) {
             }
           }
           execute("mbed new .")
-
-          if ("${radioShield}" == "wifi-ism43362") {
-            execute ("mbed add wifi-ism43362")
-          }
 
           execute ("mbed compile --build out/${target}_${toolchain}_${radioShield}/ -m ${target} -t ${toolchain} -c --app-config ${config_file}")
         }
