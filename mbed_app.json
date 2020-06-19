@@ -14,11 +14,11 @@
             "platform.stdio-convert-newlines": true
         },
         "DISCO_L475VG_IOT01A": {
-            "target.components_add": ["wifi-ism43362"],
+            "target.components_add": ["wifi_ism43362"],
             "ism43362.provide-default": true
         },
         "DISCO_F413ZH": {
-            "target.components_add": ["wifi-ism43362"],
+            "target.components_add": ["wifi_ism43362"],
             "ism43362.provide-default": true
         }
     }
