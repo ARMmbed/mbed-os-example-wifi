@@ -23,7 +23,6 @@ def raas = [
 
 // List of targets with supported RF shields to compile
 def targets = [
-  "UBLOX_EVK_ODIN_W2": ["internal"],
   "K64F": ["esp8266-driver"],
   "DISCO_L475VG_IOT01A": ["wifi-ism43362"]
   ]
@@ -31,8 +30,7 @@ def targets = [
 // Map toolchains to compilers
 def toolchains = [
   ARM: "armcc",
-  GCC_ARM: "arm-none-eabi-gcc",
-  IAR: "IAR-linux"
+  GCC_ARM: "arm-none-eabi-gcc"
   ]
 
 // Supported RF shields
