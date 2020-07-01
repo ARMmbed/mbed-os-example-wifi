@@ -16,31 +16,10 @@ For more information about Wi-Fi APIs, please visit the [Mbed OS Wi-Fi](https://
 ### Supported hardware ###
 
 * All Mbed OS boards with build-in Wi-Fi module:
-    * [u-blox ODIN-W2](https://os.mbed.com/platforms/ublox-EVK-ODIN-W2/)
-    * [Realtek RTL8195AM](https://os.mbed.com/platforms/REALTEK-RTL8195AM/)
     * [ST DISCO IOT board](https://os.mbed.com/platforms/ST-Discovery-L475E-IOT01A/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
     * [ST DISCO_F413ZH board](https://os.mbed.com/platforms/ST-Discovery-F413H/) with integrated [ISM43362 WiFi Inventek module](https://github.com/ARMmbed/wifi-ism43362).
-    * [Advantech WISE-150](https://os.mbed.com/modules/advantech-wise-1530/)
-    * USI WM-BN-BM-22
-    * MxChip EMW3166
 * Boards with external WiFi shields.
-    * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) Wi-Fi expansion board using pins D8 and D2 _(of the Arduino connector)_.
-    * [NUCLEO-F401RE](https://os.mbed.com/platforms/ST-Nucleo-F401RE/) with [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) Wi-Fi expansion board using pins PA_9 and PA_10 _(of the Morpho connector)_.
     * [NUCLEO-F429ZI](https://os.mbed.com/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 and D0.
-    * Other Mbed targets with an ESP8266 module, [X-NUCLEO-IDW04A1](http://www.st.com/content/st_com/en/products/ecosystems/stm32-open-development-environment/stm32-nucleo-expansion-boards/stm32-ode-connect-hw/x-nucleo-idw04a1.html) or [X-NUCLEO-IDW01M1](https://os.mbed.com/components/X-NUCLEO-IDW01M1/) expansion board.
-
-#### Adding connectivity driver
-
-If the target does not have internal WiFi driver, or Mbed OS does not supply one, you need to add driver to your application and configure it to provide default WiFi interface.
-
-```
-mbed add <driver>
-```
-
-For example adding ISM43362 driver `mbed add wifi-ism43362` or X-Nucleo-IDW01M1 driver `mbed add wifi-x-nucleo-idw01m1`
-The ESP8266 driver is already suplied by Mbed OS.
-
-Then pin names need to be configured as instructed in the drivers README file.
 
 ##  Getting started ##
 
@@ -50,6 +29,8 @@ Then pin names need to be configured as instructed in the drivers README file.
    mbed import mbed-os-example-wifi
    cd mbed-os-example-wifi
    ```
+
+   Or if you fetched the example with `git clone`, run `mbed deploy` inside the cloned repository.
 
 1. Configure the Wi-Fi shield and settings.
    Edit ```mbed_app.json``` to include the correct Wi-Fi shield, SSID and password:
@@ -78,13 +59,13 @@ Then pin names need to be configured as instructed in the drivers README file.
    For build-in WiFi, you do not need to set any `provide-default` values. Those are required
    if you use external WiFi shield.
 
-   Sample ```mbed_app.json``` files are provided for ESP8266 (```mbed_app_esp8266.json```), X-NUCLEO-IDW04A1 (```mbed_app_idw04a1.json```) and X-NUCLEO-IDW01M1 (```mbed_app_idw01m1```).
+   A sample ```mbed_app.json``` file is provided for ESP8266 (```mbed_app_esp8266.json```).
 
 
 1. Compile and generate binary.
     For example, for `GCC`:
     ```
-    mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
+    mbed compile -t GCC_ARM -m DISCO_L475VG_IOT01A
     ```
 
 1. Open a serial console session with the target platform using the following parameters:
