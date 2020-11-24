@@ -1,4 +1,9 @@
-![](./resources/official_armmbed_example_badge.png)
+## this example has been deprecated
+
+Please use the [sockets example](https://github.com/ARMmbed/mbed-os-example-sockets).
+
+---
+
 # mbed-os-example-wifi #
 
 Wi-Fi example for Mbed OS
