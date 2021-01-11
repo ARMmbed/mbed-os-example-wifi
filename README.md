@@ -1,3 +1,4 @@
+![](./resources/warning.png)
 ## This example has been deprecated
 
 Please use the [sockets example](https://github.com/ARMmbed/mbed-os-example-sockets). It contains all the functionality of the old Wi-Fi example.
